@@ -33,15 +33,15 @@ struct node * insert_front(struct node * head, int x) {
 // Tried iterating through
 
 struct node * free_list(struct node * head) {
-	struct node *orig = head;
-	struct node *temp = head->next;
-	while (head != NULL) {
-		printf("Freeing node containing: %d \n", head->i);
-		temp = head;
-		head = head->next;
-		*head = NULL;
-		free(temp);
+	struct node *thisNode = head;
+	struct node *nextNode;
+	while (thisNode != NULL) {
+		printf("Freeing node containing: %d \n", thisNode->i);
+		nextNode = head->next;
+		free(thisNode);
+		thisNode = NULL;
+		thisNode = nextNode;
 		
 	}
-	return orig;
+	return head;
 }
