@@ -9,8 +9,12 @@ struct node {
 // Tried doing recursive approach
 
 void print_list_iter(struct node* head) {
+	if (head == NULL){
+		printf("]\n");
+		return;
+	}
 	printf("%d ", head->i);
-	if (head->next == NULL || head == NULL) {
+	if (head->next == NULL) {
 		printf("]\n");
 	}
 	else {
@@ -35,13 +39,21 @@ struct node * insert_front(struct node * head, int x) {
 struct node * free_list(struct node * head) {
 	struct node *thisNode = head;
 	struct node *nextNode;
-	while (thisNode != NULL) {
+	while (nextNode != NULL) {
 		printf("Freeing node containing: %d \n", thisNode->i);
-		nextNode = head->next;
+		nextNode = thisNode->next;
 		free(thisNode);
 		thisNode = NULL;
 		thisNode = nextNode;
-		
 	}
-	return head;
+	return NULL;
 }
+
+struct node *remove_node(struct node * head, int data){
+	struct node *thisNode = head;
+	for (; (thisNode->next)->i == data; thisNode->next){
+		}
+	struct node *removedNode = thisNode->next;
+	thisNode->next = removedNode->next;
+	free(removedNode);
+	}
