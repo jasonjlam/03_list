@@ -51,9 +51,16 @@ struct node * free_list(struct node * head) {
 
 struct node *remove_node(struct node * head, int data){
 	struct node *thisNode = head;
-	for (; (thisNode->next)->i == data; thisNode->next){
+	for (; thisNode->next!=NULL; thisNode = thisNode->next){
+		printf ("%d\n",thisNode->i);
+		if (thisNode->next->i == data) {
+			printf ("Found node to be deleted %d \n",thisNode->next->i);
+			struct node *removedNode = thisNode->next;
+			thisNode->next = removedNode->next;
+			free(removedNode);
+			removedNode = NULL;
+			return head;
+			}
 		}
-	struct node *removedNode = thisNode->next;
-	thisNode->next = removedNode->next;
-	free(removedNode);
-	}
+	return head;
+}
